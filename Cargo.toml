@@ -1,5 +1,5 @@
 [package]
-name = "simple-package"
+name = "simple-package-with-passed-env"
 description = "This is a `simple_package` contract, to be verified in ci of `near-verify-rs` repository"
 version = "1.0.0"
 edition = "2021"
@@ -19,7 +19,7 @@ crate-type = ["cdylib", "rlib"]
 image = "sourcescan/cargo-near:0.13.4-rust-1.85.0"
 # tag after colon above serves only descriptive purpose; image is identified by digest
 image_digest = "sha256:a9d8bee7b134856cc8baa142494a177f2ba9ecfededfcdd38f634e14cca8aae2"
-# passed_env = ["KEY", "GOOGLE_QUERY"]
+passed_env = ["KEY", "GOOGLE_QUERY"]
 # build command inside of docker container
 # if docker image from default gallery is used https://hub.docker.com/r/sourcescan/cargo-near/tags,
 # the command may be any combination of flags of `cargo-near`,

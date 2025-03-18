@@ -1,6 +1,6 @@
-contract := "simple-package-verify-rs-ci.testnet"
-# export GOOGLE_QUERY := 'https://www.google.com/search?q=google+translate&sca_esv=3c150c50f502bc5d'
-# export KEY := 'VALUE'
+contract := "simple-package-with-paseed-env-verify-rs-ci.testnet"
+export GOOGLE_QUERY := 'https://www.google.com/search?q=google+translate&sca_esv=3c150c50f502bc5d'
+export KEY := 'VALUE'
 
 [group('tempalte-create-deploy')]
 _create_dev_acc target additional_args:
@@ -12,6 +12,10 @@ deploy_docker: (_create_dev_acc contract "build-reproducible-wasm")
 
 [group('deploy')]
 deploy_no_docker: (_create_dev_acc contract "build-non-reproducible-wasm")
+
+[group('repro-build')]
+build_only_docker:
+    cargo near build reproducible-wasm
 
 _download_abi target:
     near contract download-abi {{ target }} save-to-file {{ contract }}.json network-config testnet now
