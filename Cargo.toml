@@ -1,5 +1,5 @@
 [package]
-name = "simple-package"
+name = "simple-package-with-features"
 description = "This is a `simple_package` contract, to be verified in ci of `near-verify-rs` repository"
 version = "1.0.0"
 edition = "2021"
@@ -30,6 +30,9 @@ container_build_command = [
     "build",
     "non-reproducible-wasm",
     "--locked",
+    "--no-default-features",
+    "--features",
+    "near-sdk/legacy"
 ]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
