@@ -24,3 +24,14 @@
     - nearblocks account link [product.simple-factory-verify-rs-ci.testnet](https://testnet.nearblocks.io/address/product.simple-factory-verify-rs-ci.testnet?tab=contract)
       - expected source-scan verification error ❌ **Error occurred during command...**
         (due to missing `[package.metadata.near.reproducible_build]` in manifest for `simple-factory-product` and yet incorrect source-scan verification code)
+- [x] `simple-factory-with-features`
+    - tag name: `simple-factory-with-features-v1.0.0+simple-factory-product-with-features-v1.0.0`
+  - [x] `simple-factory-with-features`
+    - SHA-256 checksum bs58: DRawD2V9JdcJTfuCvdqXQ4RzpP46wNeadi74P5C4cqaV
+    - nearblocks account link [simple-factory-with-features-verify-rs-ci.testnet](https://testnet.nearblocks.io/address/simple-factory-with-features-verify-rs-ci.testnet?tab=contract)
+  - [x] `simple-factory-product-with-features`
+    - (value from build log) Sub-build artifact SHA-256 checksum bs58: 8XgSd1LzUJiouGz7nWN6cRfWj8Coyn36XUJFSkSDGptp
+    - SHA-256 checksum bs58: 8XgSd1LzUJiouGz7nWN6cRfWj8Coyn36XUJFSkSDGptp
+    - nearblocks account link [product.simple-factory-with-features-verify-rs-ci.testnet](https://testnet.nearblocks.io/address/product.simple-factory-with-features-verify-rs-ci.testnet?tab=contract)
+      - expected source-scan verification error ❌ **Error occurred during command...**
+        (due to missing `[package.metadata.near.reproducible_build]` in manifest for `simple-factory-product` and yet incorrect source-scan verification code)
