@@ -11,4 +11,5 @@ const NO_DEPOSIT: NearToken = NearToken::from_near(0); // 0yⓃ
 
 // Define the contract structure
 #[near(contract_state)]
+#[derive(Default)]
 pub struct Contract { }
