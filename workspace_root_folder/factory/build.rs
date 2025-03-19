@@ -16,6 +16,8 @@ fn main() {
         .join("Cargo.toml");
     let build_opts = BuildOpts::builder()
         .manifest_path(manifest)
+        .no_default_features(true)
+        .features("near-sdk/legacy")
         .override_nep330_contract_path(nep330_contract_path)
         // a distinct target is needed to avoid deadlock during build
         .override_cargo_target_dir("../target/build-rs-product-donation")

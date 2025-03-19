@@ -27,6 +27,9 @@ container_build_command = [
     "build",
     "non-reproducible-wasm",
     "--locked",
+    "--no-default-features",
+    "--features",
+    "near-sdk/legacy"
 ]
 
 [build-dependencies]

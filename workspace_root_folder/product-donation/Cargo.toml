@@ -25,6 +25,9 @@ container_build_command = [
     "build",
     "non-reproducible-wasm",
     "--locked",
+    "--no-default-features",
+    "--features",
+    "near-sdk/legacy"
 ]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
