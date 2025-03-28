@@ -1,4 +1,4 @@
-contract := "simple-package-nonstandard-image-verify-rs-ci.testnet"
+contract := "simple-package-nonstandard-img-verify-rs-ci.testnet"
 # export GOOGLE_QUERY := 'https://www.google.com/search?q=google+translate&sca_esv=3c150c50f502bc5d'
 # export KEY := 'VALUE'
 
