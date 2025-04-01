@@ -35,7 +35,7 @@
     - nearblocks account link [product.simple-factory-with-features-verify-rs-ci-a.testnet](https://testnet.nearblocks.io/address/product.simple-factory-with-features-verify-rs-ci-a.testnet?tab=contract)
       - expected source-scan verification error ❌ **Error occurred during command...**
         (due to missing `[package.metadata.near.reproducible_build]` in manifest for `simple-factory-product` and yet incorrect source-scan verification code)
-- [x] `simple_packagesimple_package_with_nonstandard_image`
+- [x] `simple_package_with_nonstandard_image`
   - SHA-256 checksum bs58: Fa1VfSH4SYUXymJbjG4Rz3zyLpdFciKvomtgbfa9uacd
   - nearblocks account link [simple-package-nonstandard-img-verify-rs-ci.testnet](https://testnet.nearblocks.io/address/simple-package-nonstandard-img-verify-rs-ci.testnet?tab=contract)
   - tag name: [simple-package-with-nonstandard-image-v1.0.0](https://github.com/dj8yfo/verify_contracts_collection/releases/tag/simple-package-with-nonstandard-image-v1.0.0)
