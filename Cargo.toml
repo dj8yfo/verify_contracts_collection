@@ -18,7 +18,7 @@ crate-type = ["cdylib", "rlib"]
 # docker image, descriptor of build environment
 image = "dj8yfo/sourcescan:0.x.x-dev-wasm-output-path-1.85.1"
 # tag after colon above serves only descriptive purpose; image is identified by digest
-image_digest = "sha256:f93684a583c1af3a65adb59dfd3a5059bf2621affd63de7dd803a361dbca27b0"
+image_digest = "sha256:37f6c87ae132c98378013f1e5c5bd9c51971b5c0b6dd17a2cb1691f6c403e286"
 # passed_env = ["KEY", "GOOGLE_QUERY"]
 # build command inside of docker container
 # if docker image from default gallery is used https://hub.docker.com/r/sourcescan/cargo-near/tags,
