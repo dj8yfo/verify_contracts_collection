@@ -6,7 +6,7 @@ members = [
 resolver = "2"
 
 [workspace.dependencies]
-near-sdk = { version = "5.9.0" }
+near-sdk = { version = "5.11.0" }
 
 [workspace.package]
 repository = "https://github.com/dj8yfo/verify_contracts_collection"
@@ -18,3 +18,6 @@ lto = true
 debug = false
 panic = "abort"
 overflow-checks = true
+
+[patch.crates-io]
+near-sdk = { version = "5.11.0", git = "https://github.com/dj8yfo/near-sdk-rs.git", rev = "8ef7cfc81fdbb6b5805fe59897807bebbd8f20e4"}
