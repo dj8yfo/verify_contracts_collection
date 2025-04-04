@@ -34,14 +34,18 @@ env_logger = "0.9"
 log = "0.4"
 
 [build-dependencies.cargo-near-build]
-version = "0.4.4"
+version = "0.4.5"
 features = ["build_script"]
+git = "https://github.com/dj8yfo/cargo-near.git"
+rev = "d2880ebcde6c068743197c4abb6c6da94cd13553"
 
 [dependencies]
 near-sdk = { workspace = true, features = ["unstable"] }
 
 [dev-dependencies.cargo-near-build]
-version = "0.4.4"
+version = "0.4.5"
+git = "https://github.com/dj8yfo/cargo-near.git"
+rev = "d2880ebcde6c068743197c4abb6c6da94cd13553"
 
 [dev-dependencies]
 near-sdk = { workspace = true, features = ["unit-testing"] }
