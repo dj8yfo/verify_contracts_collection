@@ -5210,12 +5210,9 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "77549399552de45a898a580c1b41d445bf730df867cc44e6c0233bbc4b8329de"
 
 [[package]]
-name = "simple-factory"
-version = "1.0.0"
+name = "simple-factory-product-with-output-path"
+version = "1.1.0"
 dependencies = [
- "cargo-near-build",
- "env_logger",
- "log",
  "near-sdk",
  "near-workspaces",
  "serde_json",
@@ -5223,9 +5220,12 @@ dependencies = [
 ]
 
 [[package]]
-name = "simple-factory-product"
-version = "1.1.0"
+name = "simple-factory-with-output-path"
+version = "1.0.0"
 dependencies = [
+ "cargo-near-build",
+ "env_logger",
+ "log",
  "near-sdk",
  "near-workspaces",
  "serde_json",

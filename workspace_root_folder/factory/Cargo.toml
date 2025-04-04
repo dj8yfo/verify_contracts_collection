@@ -1,5 +1,5 @@
 [package]
-name = "simple-factory"
+name = "simple-factory-with-output-path"
 description = "This is a `simple_factory/factory` contract, to be verified in ci of `near-verify-rs` repository"
 version = "1.0.0"
 edition = "2021"

@@ -2,15 +2,15 @@ import? 'local.just'
 
 default_args := 'build-reproducible-wasm'
 
-counter := 'a'
-factory_contract := "simple-factory-verify-rs-ci" + counter + ".testnet"
+counter := ''
+factory_contract := "factory-with-out-path-verify-rs-ci" + counter + ".testnet"
 
-aux_counter := '-aux2'
+aux_counter := '-aux3'
 child_deploy_signer := "child-deploy-signer" + aux_counter + ".testnet"
 product_contract_name := "product"
 product_from_factory_contract := product_contract_name + "." + factory_contract
 
-product_standalone_contract := "standalone-simple-product-verify-rs-ci" + aux_counter + ".testnet"
+product_standalone_contract := "simple-product-with-out-path-verify-rs" + aux_counter + ".testnet"
 factory_call_payload := "{ \"name\": \"" + product_contract_name + "\", \"beneficiary\": \"donatello2.testnet\"}"
 
 [group('tempalte-create')]
