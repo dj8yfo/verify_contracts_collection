@@ -14,7 +14,7 @@ crate-type = ["cdylib", "rlib"]
 # image from cargo-near pull#198
 [package.metadata.near.reproducible_build]
 # docker image, descriptor of build environment
-image = "dj8yfo/sourcescan:0.x.x-dev-wasm-output-path-1.85.1"
+image = "dj8yfo/sourcescan:0.14.0-rust-1.85.1"
 # tag after colon above serves only descriptive purpose; image is identified by digest
 image_digest = "sha256:308d9d714d2540b7c4c9201235b020761cdbdff18575719746b1a2ec82d64332"
 # build command inside of docker container
