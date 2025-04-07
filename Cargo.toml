@@ -5,8 +5,8 @@ members = ["devhub_common", "discussions", "community", "community-factory"]
 repository = "https://github.com/NEAR-DevHub/neardevhub-contract"
 
 [workspace.dependencies]
-near-sdk = "5.5.0"
-near-contract-standards = "5.5.0"
+near-sdk = "5.11.0"
+near-contract-standards = "5.11.0"
 devhub_common = { path = "./devhub_common" }
 cargo-near-build = { version = "0.4.3" }
 
@@ -60,3 +60,5 @@ overflow-checks = true
 
 [patch.crates-io]
 near-workspaces = { git = "https://github.com/near/workspaces-rs.git", rev = "8595a9fb5961893b16fd9af3627179f6fc8405cf" }
+near-sdk = { version = "5.11.0", git = "https://github.com/dj8yfo/near-sdk-rs.git", rev = "8ef7cfc81fdbb6b5805fe59897807bebbd8f20e4"}
+near-contract-standards = { version = "5.11.0", git = "https://github.com/dj8yfo/near-sdk-rs.git", rev = "8ef7cfc81fdbb6b5805fe59897807bebbd8f20e4"}
