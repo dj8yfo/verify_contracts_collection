@@ -45,6 +45,7 @@
   - nearblocks account link [simple-package-out-path-verify-2-ci.testnet?tab=contract](https://testnet.nearblocks.io/address/simple-package-out-path-verify-2-ci.testnet?tab=contract)
   - tag name: [dev-simple-pkg-with-out-path-v1.0.0](https://github.com/dj8yfo/verify_contracts_collection/releases/tag/dev-simple-pkg-with-out-path-v1.0.0)
 - [ ] `dev: simple_factory_with_output_path/git-dep`
+    - tag name: [dev-factory-with-out-path-v1.0.0](https://github.com/dj8yfo/verify_contracts_collection/releases/tag/dev-factory-with-out-path-v1.0.0)
   - [ ] `factory`
     - SHA-256 checksum bs58: 5MgAdpipGGBLdCmkZ1Exg5jxCJWSxVRC1Sg98J3zBi65 
     - nearblocks account link [factory-with-out-path-verify-ci-3.testnet](https://testnet.nearblocks.io/address/factory-with-out-path-verify-ci-3.testnet)
