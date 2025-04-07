@@ -2,7 +2,7 @@
 members = ["devhub_common", "discussions", "community", "community-factory"]
 
 [workspace.package]
-repository = "https://github.com/NEAR-DevHub/neardevhub-contract"
+repository = "https://github.com/dj8yfo/verify_contracts_collection"
 
 [workspace.dependencies]
 near-sdk = "5.11.0"
