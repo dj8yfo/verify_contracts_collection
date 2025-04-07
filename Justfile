@@ -1,7 +1,7 @@
 import? 'local.just'
 
 funder_account := "cargo_near_test_workflows.testnet"
-counter := `echo -n $COMMON_TEST_CASE_ACCOUNT_ID`
+counter := "outp"
 
 # devhub group
 
@@ -32,8 +32,6 @@ payload_create_community := '{ "inputs": { "handle": "' + community_handle + '",
 
 # ====================
 
-standalone_community := "standalone-devhub-community-" + counter + ".testnet"
-standalone_discussions := "standalone-devhub-discussions-" + counter + ".testnet"
 
 [group('devhub')]
 create_devhub_test_account:
@@ -75,11 +73,8 @@ _create_acc_and_deploy folder contract_account:
         without-init-call network-config testnet \
         sign-with-keychain send
 
-[group('community-standalone')]
-create_community_standalone_and_deploy: (_create_acc_and_deploy "community" standalone_community)
 
-[group('discussions-standalone')]
-create_discussions_standalone_and_deploy: (_create_acc_and_deploy "discussions" standalone_discussions)
+
 
 ## Testing
 
@@ -96,14 +91,11 @@ view_summary_community_factory: (_view_summary community_factory_contract)
 [group('account-summary')]
 view_summary_community: (_view_summary community_contract)
 
-[group('account-summary')]
-view_summary_standalone_community: (_view_summary standalone_community)
 
 [group('account-summary')]
 view_summary_discussions: (_view_summary discussions_contract)
 
-[group('account-summary')]
-view_summary_standalone_discussions: (_view_summary standalone_discussions)
+
 
 [group('test-nep330-meta')]
 _test_meta target:
@@ -118,14 +110,11 @@ test_meta_community_factory: (_test_meta community_factory_contract)
 [group('test-nep330-meta')]
 test_meta_community: (_test_meta community_contract)
 
-[group('test-nep330-meta')]
-test_meta_standalone_community: (_test_meta standalone_community)
 
 [group('test-nep330-meta')]
 test_meta_discussions: (_test_meta discussions_contract)
 
-[group('test-nep330-meta')]
-test_meta_standalone_discussions: (_test_meta standalone_discussions)
+
 
 ## Testing single command
 
@@ -144,6 +133,4 @@ download_all_wasms: && _git_cleanup
     just _download_wasm {{ community_factory_contract }}
     just _download_wasm {{ community_contract }}
     just _download_wasm {{ discussions_contract }}
-    just _download_wasm {{ standalone_community }}
-    just _download_wasm {{ standalone_discussions }}
     sha256sum *.wasm
