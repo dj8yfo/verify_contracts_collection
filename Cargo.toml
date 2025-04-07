@@ -8,7 +8,7 @@ repository = "https://github.com/NEAR-DevHub/neardevhub-contract"
 near-sdk = "5.11.0"
 near-contract-standards = "5.11.0"
 devhub_common = { path = "./devhub_common" }
-cargo-near-build = { version = "0.4.3" }
+cargo-near-build = { version = "0.4.5", git = "https://github.com/dj8yfo/cargo-near.git", rev = "d3cd146de22ca54250eb4ebb371614baeea3b8bf" }
 
 [package]
 name = "devhub"
@@ -28,7 +28,13 @@ image = "sourcescan/cargo-near:0.13.2-rust-1.84.0"
 # tag after colon above serves only descriptive purpose; image is identified by digest
 image_digest = "sha256:b41cb89907f92b114da9e2be4e109bff30ab792c22ddcbd2a4cff8e340cb9acb"
 passed_env = []
-container_build_command = ["cargo", "near", "build", "non-reproducible-wasm", "--locked"]
+container_build_command = [
+  "cargo",
+  "near",
+  "build",
+  "non-reproducible-wasm",
+  "--locked",
+]
 
 [dependencies]
 near-sdk = { workspace = true, features = ["unstable"] }
@@ -60,5 +66,5 @@ overflow-checks = true
 
 [patch.crates-io]
 near-workspaces = { git = "https://github.com/near/workspaces-rs.git", rev = "8595a9fb5961893b16fd9af3627179f6fc8405cf" }
-near-sdk = { version = "5.11.0", git = "https://github.com/dj8yfo/near-sdk-rs.git", rev = "8ef7cfc81fdbb6b5805fe59897807bebbd8f20e4"}
-near-contract-standards = { version = "5.11.0", git = "https://github.com/dj8yfo/near-sdk-rs.git", rev = "8ef7cfc81fdbb6b5805fe59897807bebbd8f20e4"}
+near-sdk = { version = "5.11.0", git = "https://github.com/dj8yfo/near-sdk-rs.git", rev = "8ef7cfc81fdbb6b5805fe59897807bebbd8f20e4" }
+near-contract-standards = { version = "5.11.0", git = "https://github.com/dj8yfo/near-sdk-rs.git", rev = "8ef7cfc81fdbb6b5805fe59897807bebbd8f20e4" }
