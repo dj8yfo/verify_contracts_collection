@@ -1,0 +1,18 @@
+{
+    "image": "ghcr.io/near/near-devcontainer:latest",
+    "features": {
+      "ghcr.io/near/near-devcontainers/features/cargo-near:latest": {},
+      "ghcr.io/near/near-devcontainers/features/near-cli:latest": {}
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "dtsvet.vscode-wasm",
+                "rust-lang.rust-analyzer",
+                "github.vscode-github-actions",
+                "vadimcn.vscode-lldb"
+            ]
+        }
+    },
+    "postCreateCommand": "./.devcontainer/post-create.sh"
+}

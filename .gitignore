@@ -1,1 +1,5 @@
-target
+.idea
+neardev/
+target/
+res/*.wasm
+.DS_Store
