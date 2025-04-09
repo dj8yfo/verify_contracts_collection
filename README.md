@@ -60,6 +60,6 @@
   - [ ] `devhub-community` 2nd lvl factory 
     - SHA-256 checksum bs58: Fg4owvvMVToMMEBHV2ZEyUUngYnxwK4h2wnwQTKBuUcV 
     - nearblocks account link [uniquehandle.community.devhub-outp.testnet](https://testnet.nearblocks.io/address/uniquehandle.community.devhub-outp.testnet?tab=contract)
-  - [ ] `devhub-discussions`
+  - [ ] `devhub-discussions` product
     - SHA-256 checksum bs58: 2V1xmChWEtq8FLQxBEsbAXHvxTdRkGG8WfvQjepftxs7
     - nearblocks account link [discussions.uniquehandle.community.devhub-outp.testnet](https://testnet.nearblocks.io/address/discussions.uniquehandle.community.devhub-outp.testnet?tab=contract)
