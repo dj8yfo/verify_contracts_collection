@@ -52,9 +52,9 @@
   - [x] `product`
     - SHA-256 checksum bs58: 52kCZoJD6RMtGWaUwJWNjH2hFfHo1bvT7mBqEozqWjka
     - nearblocks account link [product.factory-with-out-path-verify-ci-3.testnet](https://testnet.nearblocks.io/address/product.factory-with-out-path-verify-ci-3.testnet?tab=contract)
-- [ ] `dev: double-nested-factory-with-output-path/git-dep`
+- [x] `dev: double-nested-factory-with-output-path/git-dep`
     - tag name: [dev-double-nested-factory-with-out-path-v1.0.0](https://github.com/dj8yfo/verify_contracts_collection/releases/tag/dev-double-nested-factory-with-out-path-v1.0.0)
-  - [ ] `devhub-community-factory` 1st lvl factory
+  - [x] `devhub-community-factory` 1st lvl factory
     - SHA-256 checksum bs58: 5UBQ5S4WQfr3hQJonaLTw95osQzxK9PHt4Fv5QxFBCYY 
     - nearblocks account link [community.devhub-outp.testnet](https://testnet.nearblocks.io/address/community.devhub-outp.testnet?tab=contract)
   - [x] `devhub-community` 2nd lvl factory 
