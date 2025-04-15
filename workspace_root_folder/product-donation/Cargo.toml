@@ -8,12 +8,31 @@ repository.workspace = true
 [lib]
 crate-type = ["cdylib", "rlib"]
 
+# TODO: remove
+# NOTE: this was only needed for testing via build log,
+# when testnet was broken
+[package.metadata.near.reproducible_build]
+# image from cargo-near pull#198
+image = "sourcescan/cargo-near:0.13.4-rust-1.85.0"
+# tag after colon above serves only descriptive purpose; image is identified by digest
+image_digest = "sha256:a9d8bee7b134856cc8baa142494a177f2ba9ecfededfcdd38f634e14cca8aae2"
+# build command inside of docker container
+# if docker image from default gallery is used https://hub.docker.com/r/sourcescan/cargo-near/tags,
+# the command may be any combination of flags of `cargo-near`,
+# supported by respective version of binary inside the container besides `--no-locked` flag
+container_build_command = [
+    "cargo",
+    "near",
+    "build",
+    "non-reproducible-wasm",
+    "--locked",
+]
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [dependencies]
 near-sdk = { workspace = true, features = ["legacy"] }
 
 [dev-dependencies]
 near-sdk = { workspace = true }
-near-workspaces = { version = "0.10.0", features = ["unstable"] }
 tokio = { version = "1.12.0", features = ["full"] }
 serde_json = "1"
