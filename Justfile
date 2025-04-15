@@ -2,10 +2,10 @@ import? 'local.just'
 
 default_args := 'build-reproducible-wasm'
 
-counter := 'a'
+counter := 'f'
 factory_contract := "simple-factory-verify-rs-ci" + counter + ".testnet"
 
-aux_counter := '-aux2'
+aux_counter := '-aux7'
 child_deploy_signer := "child-deploy-signer" + aux_counter + ".testnet"
 product_contract_name := "product"
 product_from_factory_contract := product_contract_name + "." + factory_contract
