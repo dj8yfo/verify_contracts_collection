@@ -6,6 +6,10 @@ fn main() {
     // unix path to target sub-contract's crate from root of the repo
     let nep330_contract_path = "workspace_root_folder/product-donation";
 
+    // this is wasm result path of `cargo near build non-reproducible-wasm`
+    // for target sub-contract, where repo's root is replaced with `/home/near/code`
+    let nep330_output_wasm_path: &str = "/home/near/code/workspace_root_folder/target/near/simple_factory_product/simple_factory_product.wasm";
+
     let override_cargo_target_dir = {
         let out_dir_env = std::env::var("OUT_DIR").expect("OUT_DIR is always set in build scripts");
         let out_dir = Path::new(&out_dir_env);
@@ -23,13 +27,20 @@ fn main() {
         cmd.current_dir(workdir);
         cmd.env("CARGO_TARGET_DIR", &override_cargo_target_dir);
         cmd.env("NEP330_BUILD_INFO_CONTRACT_PATH", nep330_contract_path);
+        cmd.env(
+            "NEP330_BUILD_INFO_OUTPUT_WASM_PATH",
+            nep330_output_wasm_path,
+        );
         cmd
     };
 
     let is_abi_or_cargo_check = is_abi_build_step_or_debug_profile();
+
     let out_path = if is_abi_or_cargo_check {
         override_cargo_target_dir.join("empty_subcontract_stub.wasm")
     } else {
+        // this is wasm result path of `cargo near build non-reproducible-wasm`,
+        // for target sub-contract, subpath after `target`
         override_cargo_target_dir.join("near/simple_factory_product/simple_factory_product.wasm")
     };
 
