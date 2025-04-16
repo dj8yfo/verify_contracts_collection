@@ -2,7 +2,7 @@ import? 'local.just'
 
 default_args := 'build-reproducible-wasm'
 
-counter := 'a'
+counter := '-b'
 factory_contract := "simple-factory-bin-build-rs" + counter + ".testnet"
 
 aux_counter := '-aux8'
