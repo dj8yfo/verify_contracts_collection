@@ -36,7 +36,15 @@ fn main() {
 
     let command = {
         let mut cmd = std::process::Command::new("cargo");
-        cmd.args(["near", "build", "non-reproducible-wasm", "--locked"]);
+        cmd.args([
+            "near",
+            "build",
+            "non-reproducible-wasm",
+            "--locked",
+            "--no-default-features",
+            "--features",
+            "near-sdk/legacy",
+        ]);
 
         cmd.current_dir(workdir);
         cmd.env("CARGO_TARGET_DIR", &override_cargo_target_dir);
