@@ -83,7 +83,7 @@ fn main() {
 
     post_build::step(
         is_abi_or_cargo_check,
-        workdir,
+        vec![workdir, "../Cargo.toml", "../Cargo.lock"],
         out_path,
         "BUILD_RS_SUB_BUILD_ARTIFACT_1",
     );
@@ -135,11 +135,11 @@ mod post_build {
     use sha2::{Digest, Sha256};
     pub fn step(
         is_abi_or_cargo_check: bool,
-        workdir: &str,
+        watched_paths: Vec<&str>,
         out_path: PathBuf,
         result_env_var: &str,
     ) {
-        for in_path in vec![workdir, "../Cargo.toml", "../Cargo.lock"] {
+        for in_path in watched_paths {
             println!("cargo::rerun-if-changed={}", in_path);
         }
         println!(
