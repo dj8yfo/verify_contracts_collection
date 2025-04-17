@@ -2,10 +2,10 @@ import? 'local.just'
 
 default_args := 'build-reproducible-wasm'
 
-counter := '-c'
+counter := '-d'
 factory_contract := "simple-factory-bin-build-rs" + counter + ".testnet"
 
-aux_counter := '-aux10'
+aux_counter := '-aux11'
 child_deploy_signer := "child-deploy-signer" + aux_counter + ".testnet"
 product_contract_name := "product"
 product_from_factory_contract := product_contract_name + "." + factory_contract
@@ -43,7 +43,7 @@ deploy_product_standalone: create_standalone_product_dev_acc (_deploy_generic "w
 
 [group('test-nep330-meta')]
 _test_meta target:
-    near contract call-function as-read-only {{ target }} contract_source_metadata json-args {} network-config testnet now
+    near --quiet contract call-function as-read-only {{ target }} contract_source_metadata json-args {} network-config testnet now
 
 [group('test-nep330-meta')]
 test_meta_factory: (_test_meta factory_contract)
