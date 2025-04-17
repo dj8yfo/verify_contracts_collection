@@ -1,45 +1,145 @@
-use std::str::FromStr;
+use std::path::Path;
+pub fn is_abi_build_step_or_debug_profile() -> bool {
+    if let Ok(value) = std::env::var("CARGO_NEAR_ABI_GENERATION") {
+        if value == "true" {
+            return true;
+        }
+    }
+    if let Ok(value) = std::env::var("PROFILE") {
+        if value == "debug" {
+            return true;
+        }
+    }
+    false
+}
 
-use cargo_near_build::{bon, camino, extended};
-use cargo_near_build::BuildOpts;
+fn override_cargo_target_dir() -> std::path::PathBuf {
+    let out_dir_env = std::env::var("OUT_DIR").expect("OUT_DIR is always set in build scripts");
+    let out_dir = Path::new(&out_dir_env);
 
-fn main() -> Result<(), Box<dyn std::error::Error + 'static>> {
-    // directory of target `devhub-community` sub-contract's crate
+    let dir = out_dir.join(format!("target-{}-for-{}", "product", "factory"));
+
+    std::fs::create_dir_all(&dir).expect("create dir");
+    dir
+}
+fn main() {
+    // directory of target sub-contract's crate
     let workdir = "../community";
-    // unix path to target `devhub-community` sub-contract's crate from root of the repo
+    // unix path to `workdir` from root of the repo
     let nep330_contract_path = "community";
 
-    let manifest = camino::Utf8PathBuf::from_str(workdir)
-        .expect("pathbuf from str")
-        .join("Cargo.toml");
+    // this is wasm result path of `cargo near build non-reproducible-wasm`
+    // for target sub-contract, where repo's root is replaced with `/home/near/code`
+    let nep330_output_wasm_path: &str =
+        "/home/near/code/target/near/devhub_community/devhub_community.wasm";
 
-    let build_opts = BuildOpts::builder()
-        .manifest_path(manifest)
-        .override_nep330_contract_path(nep330_contract_path)
-        // a distinct target is needed to avoid deadlock during build
-        .override_cargo_target_dir("../target/build-rs-community-for-community-factory")
-        .build();
+    let override_cargo_target_dir = override_cargo_target_dir();
 
-    let build_script_opts = extended::BuildScriptOpts::builder()
-        .rerun_if_changed_list(bon::vec![
+    let command = {
+        let mut cmd = std::process::Command::new("cargo");
+        cmd.args(["near", "build", "non-reproducible-wasm", "--locked"]);
+
+        cmd.current_dir(workdir);
+        cmd.env("CARGO_TARGET_DIR", &override_cargo_target_dir);
+        cmd.env("NEP330_BUILD_INFO_CONTRACT_PATH", nep330_contract_path);
+        cmd.env("NEP330_BUILD_INFO_OUTPUT_WASM_PATH", nep330_output_wasm_path);
+        cmd.env("NO_COLOR", "true");
+        cmd.stdout(std::process::Stdio::piped());
+        cmd.stderr(std::process::Stdio::piped());
+        cmd
+    };
+
+    let is_abi_or_cargo_check = is_abi_build_step_or_debug_profile();
+
+    let out_path = run_build::step(command, is_abi_or_cargo_check, &override_cargo_target_dir);
+
+    post_build::step(
+        is_abi_or_cargo_check,
+        vec![
             "../discussions", // transitive dependecy of `devhub-community` contract
             workdir,
             "Cargo.toml",
             "../Cargo.lock",
-        ])
-        .build_skipped_when_env_is(vec![
-            // shorter build for `cargo check`
-            ("PROFILE", "debug"),
-            (cargo_near_build::env_keys::BUILD_RS_ABI_STEP_HINT, "true"),
-        ])
-        .stub_path("../target/community-stub.bin")
-        .result_env_key("BUILD_RS_SUB_BUILD_DEVHUB-COMMUNITY")
-        .build();
+        ],
+        out_path,
+        "BUILD_RS_SUB_BUILD_DEVHUB-COMMUNITY",
+    );
+}
 
-    let extended_opts = extended::BuildOptsExtended::builder()
-        .build_opts(build_opts)
-        .build_script_opts(build_script_opts)
-        .build();
-    cargo_near_build::extended::build(extended_opts)?;
-    Ok(())
+mod run_build {
+
+    use std::path::PathBuf;
+    const RESULT_PREFIX: &str = "     -                Binary: ";
+
+    pub fn step(
+        mut command: std::process::Command,
+        is_abi_or_cargo_check: bool,
+        override_cargo_target_dir: &PathBuf,
+    ) -> PathBuf {
+        if is_abi_or_cargo_check {
+            let out_path = override_cargo_target_dir.join("empty_subcontract_stub.wasm");
+            std::fs::write(&out_path, b"").expect("success write");
+            out_path
+        } else {
+            let process = command.spawn().expect("could not spawn cargo-near");
+            let output = process.wait_with_output().expect("waiting for cargo-near to finish");
+            if !output.status.success() {
+                panic!(
+                    "build with cargo-near failure: {}",
+                    String::from_utf8_lossy(&output.stderr)
+                );
+            }
+
+            let stderr = String::from_utf8_lossy(&output.stderr);
+            let result_line = stderr.lines().filter(|x| x.starts_with(RESULT_PREFIX)).last();
+
+            let out_path = result_line
+                .expect("no output line find in cargo-near output")
+                .strip_prefix(RESULT_PREFIX);
+            PathBuf::from(out_path.expect("starts with expected prefix").to_string())
+        }
+    }
+}
+
+mod post_build {
+    use std::path::PathBuf;
+
+    use sha2::{Digest, Sha256};
+    pub fn step(
+        is_abi_or_cargo_check: bool,
+        watched_paths: Vec<&str>,
+        out_path: PathBuf,
+        result_env_var: &str,
+    ) {
+        for in_path in watched_paths {
+            println!("cargo::rerun-if-changed={}", in_path);
+        }
+        println!("cargo::rustc-env={}={}", result_env_var, out_path.to_str().expect("valid utf8"));
+        if is_abi_or_cargo_check {
+            println!(
+                "cargo::warning={}",
+                format!("subcontract empty stub is `{}`", out_path.to_str().expect("valid utf8"))
+            );
+        } else {
+            println!(
+                "cargo::warning={}",
+                format!("subcontract out path is `{}`", out_path.to_str().expect("valid utf8"))
+            );
+        }
+
+        if !is_abi_or_cargo_check {
+            println!(
+                "cargo::warning={}",
+                format!("subcontract sha256 is {}", compute_hash(&out_path))
+            );
+        }
+    }
+
+    fn compute_hash(path: &PathBuf) -> String {
+        let mut hasher = Sha256::new();
+        hasher.update(std::fs::read(&path).expect("path read"));
+        let hash = hasher.finalize();
+        let hash: &[u8] = hash.as_ref();
+        bs58::encode(&hash).into_string()
+    }
 }

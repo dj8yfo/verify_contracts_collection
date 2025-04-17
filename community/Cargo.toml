@@ -8,11 +8,10 @@ repository.workspace = true
 [lib]
 crate-type = ["cdylib"]
 
-
+[build-dependencies]
+bs58 = "0.5.1"
+sha2 = "0.10.8"
 
 [dependencies]
 near-sdk.workspace = true
 devhub_common.workspace = true
-
-[build-dependencies]
-cargo-near-build = { workspace = true, features = ["build_script"] }

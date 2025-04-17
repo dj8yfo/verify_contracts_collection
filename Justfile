@@ -1,7 +1,7 @@
 import? 'local.just'
 
 funder_account := "cargo_near_test_workflows.testnet"
-counter := "outp"
+counter := "binb"
 
 # devhub group
 
