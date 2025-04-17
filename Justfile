@@ -1,7 +1,7 @@
 import? 'local.just'
 
 funder_account := "cargo_near_test_workflows.testnet"
-counter := "binb"
+counter := "binc"
 
 # devhub group
 
@@ -99,7 +99,7 @@ view_summary_discussions: (_view_summary discussions_contract)
 
 [group('test-nep330-meta')]
 _test_meta target:
-    near contract call-function as-read-only {{ target }} contract_source_metadata json-args {} network-config testnet now
+    near --quiet contract call-function as-read-only {{ target }} contract_source_metadata json-args {} network-config testnet now
 
 [group('test-nep330-meta')]
 test_meta_devhub: (_test_meta devhub_test_contract)
