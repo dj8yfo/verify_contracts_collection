@@ -22,6 +22,20 @@ fn override_cargo_target_dir() -> std::path::PathBuf {
     std::fs::create_dir_all(&dir).expect("create dir");
     dir
 }
+
+fn passed_env_logic(args: &mut Vec<String>, passed_env_keys: Vec<&str>) {
+    let env_key_assingments = passed_env_keys
+        .iter()
+        .filter_map(|key| {
+            std::env::var(key)
+                .ok()
+                .map(|value| [key, value.as_str()].join("="))
+        })
+        .flat_map(|env_key_assingment| vec!["--env".to_string(), env_key_assingment]);
+
+    args.extend(env_key_assingments);
+}
+
 fn main() {
     // directory of target sub-contract's crate
     let workdir = "../product-donation";
@@ -34,9 +48,21 @@ fn main() {
 
     let override_cargo_target_dir = override_cargo_target_dir();
 
+    let passed_env_keys = vec!["KEY", "GOOGLE_QUERY"];
+
     let command = {
         let mut cmd = std::process::Command::new("cargo");
-        cmd.args(["near", "build", "non-reproducible-wasm", "--locked"]);
+        let args = {
+            let mut args = vec!["near", "build", "non-reproducible-wasm", "--locked"]
+                .into_iter()
+                .map(String::from)
+                .collect::<Vec<_>>();
+
+            passed_env_logic(&mut args, passed_env_keys);
+
+            args
+        };
+        cmd.args(args);
 
         cmd.current_dir(workdir);
         cmd.env("CARGO_TARGET_DIR", &override_cargo_target_dir);
