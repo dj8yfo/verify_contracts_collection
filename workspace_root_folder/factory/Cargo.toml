@@ -30,7 +30,7 @@ container_build_command = [
 ]
 
 [build-dependencies]
-cargo-near-build = { git = "https://github.com/dj8yfo/cargo-near.git", rev = "5e14a169d527737c5412acf3dcf399ca8171af9b", version = "0.5.1" }
+cargo-near-build = { git = "https://github.com/dj8yfo/cargo-near.git", rev = "01072b9b5fdac3dbe1b26bcc1bb9dae3bff5674d", version = "0.5.1" }
 
 
 [dependencies]
