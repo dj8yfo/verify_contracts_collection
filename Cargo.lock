@@ -229,7 +229,17 @@ version = "2.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "97493a391b4b18ee918675fb8663e53646fd09321c58b46afa04e8ce2499c869"
 dependencies = [
- "bon-macros",
+ "bon-macros 2.3.0",
+ "rustversion",
+]
+
+[[package]]
+name = "bon"
+version = "3.6.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ced38439e7a86a4761f7f7d5ded5ff009135939ecb464a24452eaa4c1696af7d"
+dependencies = [
+ "bon-macros 3.6.3",
  "rustversion",
 ]
 
@@ -243,6 +253,21 @@ dependencies = [
  "ident_case",
  "proc-macro2",
  "quote",
+ "syn 2.0.96",
+]
+
+[[package]]
+name = "bon-macros"
+version = "3.6.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0ce61d2d3844c6b8d31b2353d9f66cf5e632b3e9549583fe3cac2f4f6136725e"
+dependencies = [
+ "darling",
+ "ident_case",
+ "prettyplease 0.2.32",
+ "proc-macro2",
+ "quote",
+ "rustversion",
  "syn 2.0.96",
 ]
 
@@ -356,7 +381,7 @@ version = "0.4.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f636b040ef075162fc7280d1e886bfa04fe7a0761f30a736f540f43cb00a4f0e"
 dependencies = [
- "bon",
+ "bon 2.3.0",
  "bs58 0.5.1",
  "camino",
  "cargo_metadata",
@@ -377,6 +402,26 @@ dependencies = [
  "tracing",
  "wasm-opt",
  "zstd 0.13.2",
+]
+
+[[package]]
+name = "cargo-near-build"
+version = "0.5.1"
+source = "git+https://github.com/dj8yfo/cargo-near.git?rev=01072b9b5fdac3dbe1b26bcc1bb9dae3bff5674d#01072b9b5fdac3dbe1b26bcc1bb9dae3bff5674d"
+dependencies = [
+ "bon 3.6.3",
+ "bs58 0.5.1",
+ "camino",
+ "cargo_metadata",
+ "colored",
+ "dunce",
+ "eyre",
+ "hex",
+ "indenter",
+ "pathdiff",
+ "rustc_version",
+ "sha2",
+ "tracing",
 ]
 
 [[package]]
@@ -811,20 +856,18 @@ dependencies = [
 name = "devhub-community"
 version = "0.1.0"
 dependencies = [
- "bs58 0.5.1",
+ "cargo-near-build 0.5.1",
  "devhub_common",
  "near-sdk",
- "sha2",
 ]
 
 [[package]]
 name = "devhub-community-factory"
 version = "0.1.0"
 dependencies = [
- "bs58 0.5.1",
+ "cargo-near-build 0.5.1",
  "devhub_common",
  "near-sdk",
- "sha2",
 ]
 
 [[package]]
@@ -1946,7 +1989,7 @@ dependencies = [
  "convert_case 0.5.0",
  "near-abi-client-impl",
  "near-abi-client-macros",
- "prettyplease",
+ "prettyplease 0.1.25",
  "quote",
  "syn 1.0.109",
 ]
@@ -2509,7 +2552,7 @@ dependencies = [
  "async-trait",
  "base64 0.22.1",
  "bs58 0.5.1",
- "cargo-near-build",
+ "cargo-near-build 0.4.5",
  "chrono",
  "fs2",
  "json-patch",
@@ -2756,6 +2799,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "pathdiff"
+version = "0.2.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "df94ce210e5bc13cb6651479fa48d14f601d9858cfe0467f43ae157023b938d3"
+dependencies = [
+ "camino",
+]
+
+[[package]]
 name = "pbkdf2"
 version = "0.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2911,6 +2963,16 @@ checksum = "6c8646e95016a7a6c4adea95bafa8a16baab64b583356217f2c85db4a39d9a86"
 dependencies = [
  "proc-macro2",
  "syn 1.0.109",
+]
+
+[[package]]
+name = "prettyplease"
+version = "0.2.32"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "664ec5419c51e34154eec046ebcba56312d5a2fc3b09a06da188e1ad21afadf6"
+dependencies = [
+ "proc-macro2",
+ "syn 2.0.96",
 ]
 
 [[package]]
