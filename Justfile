@@ -1,4 +1,4 @@
-contract := "simple-package-out-path-verify-3-ci.testnet"
+contract := "simple-package-out-path-verify-4-ci.testnet"
 # export GOOGLE_QUERY := 'https://www.google.com/search?q=google+translate&sca_esv=3c150c50f502bc5d'
 # export KEY := 'VALUE'
 
